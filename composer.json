@@ -1,0 +1,23 @@
+{
+    "name": "tuysay/pop-it-mvc",
+    "description": "DA",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "misha",
+            "email": "misha.gapeev.04@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4 | ^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "core/Src/",
+            "": "app/"
+        }
+    }
+}
+
