@@ -1,0 +1,144 @@
+body{
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+form {
+    max-width: 400px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+select{
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: coral;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: chocolate;
+}
+
+
+
+
+.xyu {
+    position: absolute;
+
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    max-width: 200px;
+    background-color: antiquewhite;
+    padding: 30px;
+    border-radius: 8px;
+    margin-left: 35%;
+    margin-top: -47%;
+}
+
+
+
+header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    border: 1px solid #ccc;
+}
+
+.menu {
+    flex-grow: 1;
+}
+.menu ul {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.menu li {
+    margin-right: 20px;
+}
+.menu li:last-child {
+    margin-right: 0;
+}
+.menu a {
+    padding: 8px 10px;
+}
+
+.menu a,
+.menu .active {
+    display: block;
+    padding: 8px 10px;
+}
+.menu .active {
+    color: #fff;
+    background-color: #ff3d00;
+    border-radius: 8px;
+}
+.menu ul {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 18px;
+    list-style: none;
+}
+.menu a,
+.menu .active {
+    display: block;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    letter-spacing: .27em;
+}
+.menu a {
+    color: #000;
+    text-decoration: none;
+}
+.tel {
+    font-size: 20px;
+    line-height: 24px;
+}
+.tel a {
+    color: #000;
+    text-decoration: none;
+}
+
+

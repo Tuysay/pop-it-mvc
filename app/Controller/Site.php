@@ -2,18 +2,23 @@
 
 namespace Controller;
 
-use Model\Post;
+
+use Model\Department;
+use Model\Disciplines;
+use Model\Employee;
+use Model\Posts;
 use Src\Request;
 use Src\View;
 use Model\User;
 use Src\Auth\Auth;
 
 
+
 class Site
 {
     public function index(): string
     {
-        $posts = Post::all();
+        $posts = Posts::all();
         return (new View())->render('site.post', ['posts' => $posts]);
     }
 
@@ -25,7 +30,7 @@ class Site
     public function signup(Request $request): string
     {
         if ($request->method === 'POST' && User::create($request->all())) {
-            app()->route->redirect('/go');
+            app()->route->redirect('/hello');
         }
         return new View('site.signup');
     }
@@ -49,6 +54,77 @@ class Site
         Auth::logout();
         app()->route->redirect('/hello');
     }
+
+    public function disciplines(Request $request): string
+    {
+        if ($request->method === 'POST' && Disciplines::create($request->all())) {
+            app()->route->redirect('/hello');
+        }
+        return new View('site.disciplines');
+    }
+
+    public function department(Request $request): string
+    {
+        $departments = Department::all();
+
+        if ($request->method === 'POST' && Department::create($request->all())) {
+            app()->route->redirect('/department');
+        }
+
+
+        return new View('site.department');
+
+    }
+
+    public function employee(Request $request): string
+    {
+        $departments = Department::all();
+        $posts = Posts::all();
+        $disciplines = Disciplines::all();
+        if ($request->method === 'POST' && Employee::create($request->all())) {
+            app()->route->redirect('/hello');
+        }
+        return new View('site.employee', ['department' => $departments, 'posts' => $posts, 'disciplines' => $disciplines]);
+    }
+
+    public function posts(Request $request): string
+    {
+
+        if ($request->method === 'POST' && Posts::create($request->all())) {
+            app()->route->redirect('/hello');
+        }
+        return new View('site.posts');
+    }
+
+    public function search_employee(): string
+    {
+        $searchName = $_POST['employee'] ?? [];
+        if (!empty($searchName)) {
+            $employees = Employee::whereIn('firt_name', $searchName)->get();
+        }
+
+
+        return new View('site.search_employee', ['employees' => $employees]);
+    }
+//    public function employee_department(Request $request): string
+//    {
+//        $departments = Department::all();
+//
+//        if (array_key_exists('department', $request->all())) {
+//            $selectedDepartment = $request->get('department');
+//        } else {
+//            $selectedDepartment = [];
+//        }
+//
+//        if (!empty($selectedDepartment)) {
+//            $employees = Employee::whereIn('department_id', $selectedDepartment)->get();
+//        } else {
+//            $employees = Employee::all();
+//        }
+//
+//        return new View('site.employee_department', ['employees' => $employees, 'departments' => $departments]);
+//    }
+
 
 
 
