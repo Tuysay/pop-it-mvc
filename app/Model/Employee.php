@@ -20,4 +20,7 @@ class Employee extends Model
         'birthday',
         'disciplines_id'
     ];
+
+
+
 }

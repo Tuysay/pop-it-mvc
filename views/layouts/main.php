@@ -21,9 +21,9 @@
             <?php
             else:
                 ?>
-                <a href="<?= app()->route->getUrl('/employee') ?>">Добавление сотрудника</a>
-                <a href="<?= app()->route->getUrl('/disciplines') ?>">Добавление дисциплины</a>
-                <a href="<?= app()->route->getUrl('/department') ?>">Добавление департамента</a>
+                <a href="<?= app()->route->getUrl('/add_employee') ?>">Добавление сотрудника</a>
+                <a href="<?= app()->route->getUrl('/add_disciplines') ?>">Добавление дисциплины</a>
+                <a href="<?= app()->route->getUrl('/add_department') ?>">Добавление департамента</a>
                 <a href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
 
             <?php

@@ -7,6 +7,7 @@ use Model\Department;
 use Model\Disciplines;
 use Model\Employee;
 use Model\Posts;
+use Model\Role;
 use Src\Request;
 use Src\View;
 use Model\User;
@@ -24,16 +25,31 @@ class Site
 
     public function hello(): string
     {
-        return new View('site.hello', ['message' => 'hello working']);
+        return new View('site.hello');
     }
 
     public function signup(Request $request): string
     {
-        if ($request->method === 'POST' && User::create($request->all())) {
+        $roles = Role::all();
+        if (User::create($request->all())) {
             app()->route->redirect('/hello');
         }
-        return new View('site.signup');
+        return new View('site.signup', ['roles' => $roles]);
     }
+
+    public function admin_add_employee(Request $request): string
+    {
+
+        if ($request->method === 'POST' && User::create($request->all())) {
+            app()->route->redirect('/admin_add_employee');
+        }
+
+        // Вызов метода для получения данных из другой таблицы
+
+        // Внедрение данных в представление
+        return new View('site.admin_add_employee');
+    }
+
 
     public function login(Request $request): string
     {
@@ -45,6 +61,7 @@ class Site
         if (Auth::attempt($request->all())) {
             app()->route->redirect('/hello');
         }
+
         //Если аутентификация не удалась, то сообщение об ошибке
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
     }
@@ -55,28 +72,37 @@ class Site
         app()->route->redirect('/hello');
     }
 
-    public function disciplines(Request $request): string
+    public function add_disciplines(Request $request): string
     {
         if ($request->method === 'POST' && Disciplines::create($request->all())) {
             app()->route->redirect('/hello');
         }
-        return new View('site.disciplines');
+        return new View('site.add_disciplines');
     }
 
-    public function department(Request $request): string
+    public function add_department(Request $request): string
     {
         $departments = Department::all();
 
         if ($request->method === 'POST' && Department::create($request->all())) {
-            app()->route->redirect('/department');
+            app()->route->redirect('/add_department');
         }
 
 
-        return new View('site.department');
+        return new View('site.add_department');
 
     }
 
-    public function employee(Request $request): string
+    public function add_posts(Request $request): string
+    {
+
+        if ($request->method === 'POST' && Posts::create($request->all())) {
+            app()->route->redirect('/hello');
+        }
+        return new View('site.add_posts');
+    }
+
+    public function add_employee(Request $request): string
     {
         $departments = Department::all();
         $posts = Posts::all();
@@ -84,19 +110,12 @@ class Site
         if ($request->method === 'POST' && Employee::create($request->all())) {
             app()->route->redirect('/hello');
         }
-        return new View('site.employee', ['department' => $departments, 'posts' => $posts, 'disciplines' => $disciplines]);
+        return new View('site.add_employee', ['department' => $departments, 'posts' => $posts, 'disciplines' => $disciplines]);
     }
 
-    public function posts(Request $request): string
-    {
 
-        if ($request->method === 'POST' && Posts::create($request->all())) {
-            app()->route->redirect('/hello');
-        }
-        return new View('site.posts');
-    }
 
-    public function search_employee(): string
+    public function employee_search(): string
     {
         $searchName = $_POST['employee'] ?? [];
         if (!empty($searchName)) {
@@ -104,8 +123,26 @@ class Site
         }
 
 
-        return new View('site.search_employee', ['employees' => $employees]);
+        return new View('site.employee_search', ['employees' => $employees]);
     }
+    public function add(): string
+    {
+        return new View('site.add');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    public function employee_department(Request $request): string
 //    {
 //        $departments = Department::all();
