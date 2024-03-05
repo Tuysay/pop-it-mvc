@@ -5,4 +5,4 @@
     <button>Зарегистрироваться</button>
 </form>
 
-<a class="xyu" href="<?= app()->route->getUrl('/search_employee') ?>">Поиск сотрудника</a>
+<a class="sas" href="<?= app()->route->getUrl('/profile') ?>">Поиск по дисциплине</a>

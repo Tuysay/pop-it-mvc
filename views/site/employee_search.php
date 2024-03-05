@@ -16,11 +16,12 @@
                 echo '<p>Фамилия: ' . $employee->last_name . '</p>';
                 echo '<p>Отчество: ' . $employee->patronymic . '</p>';
                 echo '<p>Пол: ' . $employee->gender . '</p>';
-                echo '<p>Дата рождения: ' . $employee->birthdate . '</p>';
+                echo '<p>Дата рождения: ' . $employee->birthday . '</p>';
                 echo '<p>Адрес проживания: ' . $employee->address . '</p>';
                 echo '<p>Должность: ' . $employee->post_id . '</p>';
                 echo '<p>Департамент ' . $employee->department_id. '</p>';
                 echo '<p>Дисциплина: ' . $employee->disciplines_id . '</p>';
+//                echo '<p><a href="/profile?id='.$employee->id.'">Просмотр</a></p>';
                 echo '<br><br><br>';
             }
         }

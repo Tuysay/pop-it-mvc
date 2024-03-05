@@ -4,7 +4,7 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class Employee extends Model
 {
     use HasFactory;
@@ -21,6 +21,11 @@ class Employee extends Model
         'disciplines_id'
     ];
 
+//    public  function  deployments(): HasManyThrough
+//    {
+//        return $this->hasManyThrough(Disciplines::class, Employee::class);
+//    }
+//
 
 
 }

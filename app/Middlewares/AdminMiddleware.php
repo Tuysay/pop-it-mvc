@@ -9,7 +9,7 @@ class AdminMiddleware
 {
     public function handle(Request $request)
     {
-        if ($_SESSION['IDRole'] !=1)  {
+        if (Auth::check() && !Auth::user()->isAdmin()) {
             app()->route->redirect('/hello');
         }
     }

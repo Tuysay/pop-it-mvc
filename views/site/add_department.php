@@ -5,4 +5,4 @@
 
     <button>Зарегистрироваться</button>
 </form>
-<a href="<?= app()->route->getUrl('/department_all') ?>">Поиск сотрудника</a>
+
