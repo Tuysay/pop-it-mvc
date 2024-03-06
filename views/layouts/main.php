@@ -17,7 +17,7 @@
             if (!app()->auth::check()):
                 ?>
                 <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
-                <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
+                <a href="<?= app()->route->getUrl('/add_admin_employee') ?>">Регистрация обычного пользователя</a>
             <?php
             else:
                 ?>
@@ -25,6 +25,7 @@
                 <a href="<?= app()->route->getUrl('/add_disciplines') ?>">Добавление дисциплины</a>
                 <a href="<?= app()->route->getUrl('/add_department') ?>">Добавление департамента</a>
                 <a href="<?= app()->route->getUrl('/add_posts') ?>">Добавление должно</a>
+                <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация основная</a>
                 <a href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
 
             <?php

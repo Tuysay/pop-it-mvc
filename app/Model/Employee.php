@@ -4,7 +4,8 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 class Employee extends Model
 {
     use HasFactory;
@@ -18,14 +19,12 @@ class Employee extends Model
         'post_id',
         'department_id',
         'birthday',
-        'disciplines_id'
     ];
 
-//    public  function  deployments(): HasManyThrough
-//    {
-//        return $this->hasManyThrough(Disciplines::class, Employee::class);
-//    }
-//
+    public function disciplines(): BelongsToMany
+    {
+        return $this->belongsToMany(Disciplines::class, 'emp_disciplines', 'id_employees', 'disciplines_id');
+    }
 
 
 }

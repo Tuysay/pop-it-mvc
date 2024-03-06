@@ -37,17 +37,13 @@ class Site
         return new View('site.signup', ['roles' => $roles]);
     }
 
-    public function admin_add_employee(Request $request): string
+    public function add_admin_employee(Request $request): string
     {
-
+        $roles = Role::all();
         if ($request->method === 'POST' && User::create($request->all())) {
-            app()->route->redirect('/admin_add_employee');
+            app()->route->redirect('/hello');
         }
-
-        // Вызов метода для получения данных из другой таблицы
-
-        // Внедрение данных в представление
-        return new View('site.admin_add_employee');
+        return new View('site.add_admin_employee', ['roles' => $roles]);
     }
 
 
@@ -107,23 +103,28 @@ class Site
         $departments = Department::all();
         $posts = Posts::all();
         $disciplines = Disciplines::all();
-        if ($request->method === 'POST' && Employee::create($request->all())) {
+        if ($request->method === 'POST' && $employee = Employee::create($request->all())) {
+           $discipline = Disciplines::find($request->disciplines_id);
+            $employee->disciplines()->save($discipline);
             app()->route->redirect('/hello');
         }
-        return new View('site.add_employee', ['department' => $departments, 'posts' => $posts, 'disciplines' => $disciplines]);
+
+        return new View('site.add_employee', ['departments' => $departments, 'posts' => $posts, 'disciplines' => $disciplines]);
     }
+
 
 
 
     public function employee_search(): string
     {
+        $disciplines = Disciplines::all();
         $searchName = $_POST['employee'] ?? [];
         if (!empty($searchName)) {
             $employees = Employee::whereIn('firt_name', $searchName)->get();
         }
 
 
-        return new View('site.employee_search', ['employees' => $employees]);
+        return new View('site.employee_search', ['employees' => $employees, 'disciplines' => $disciplines,]);
     }
     public function add(): string
     {
@@ -131,68 +132,10 @@ class Site
     }
     public function profile(): string
     {
-        $disciplines = Disciplines::all();
-        $selectedDepartments = $_POST['disciplines'] ?? [];
+       $disciplines = Disciplines::all();
+       $selectDiscipline = Disciplines::find($_POST['disciplines'] ?? null) ?? Disciplines::all();
 
-        if (!empty($selectedDepartments)) {
-            $employees = Employee::whereIn('disciplines_id', $selectedDepartments)->get();
-        } else {
-            $employees = Employee::all();
-        }
-//        return new View('site.employee_show', ['employees' => $employees, 'departments' => $departments, 'averageAge' => $averageAge, 'employees2' => $employees2]);
-//    }
-
-        return new View('site.profile', ['employees' => $employees,'disciplines' => $disciplines]);
-    }
-
-//    public function profiledel(): string
-//    {
-//        $disciplines = Disciplines::all();
-//        $selectedDepartments = $_POST['disciplines'] ?? [];
-//
-//        $employees = Employee::query();
-//
-//        if (!empty($selectedDepartments)) {
-//            $employees->whereNotIn('disciplines_id', $selectedDepartments);
-//        }
-//
-//        $employees->delete();
-//
-//        return new View('site.profile', ['employees' => $employees, 'disciplines' => $disciplines]);
-//    }
-
-//    public function profiledel(): string
-//    {
-//        $disciplines = Disciplines::all();
-//        $selectedDepartments = $_POST['disciplines'] ?? [];
-//        $oldDepartmentId = $_POST['old_department_id'] ?? null;
-//        $newDepartmentId = $_POST['new_department_id'] ?? null;
-//
-//        if (!empty($selectedDepartments) && $oldDepartmentId && $newDepartmentId) {
-//            Employee::where('disciplines_id', $oldDepartmentId)->update(['disciplines_id' => $newDepartmentId]);
-//        }
-//
-//        $employees = Employee::all();
-//
-//        return new View('site.profile', ['employees' => $employees, 'disciplines' => $disciplines]);
-//    }
-
-    public function disciplines_swap(Request $request): string
-    {
-        $disciplines = Disciplines::all();
-        $selectedDepartments = $_POST['disciplines'] ?? [];
-        $selectedEmployees = $_POST['employee'] ?? [];
-
-        $disciplines = Disciplines::all();
-//        if ($request->method === 'POST' && Employee::create($request->all())) {
-//            app()->route->redirect('/hello');
-//        }
-        if(!empty($selectedDepartments) && $selectedEmployees) {
-            Employee::where('disciplines_id', $selectedEmployees)->update(['id'=> $selectedDepartments]);
-        }
-
-        $employees = Employee::all();
-        return new View('site.disciplines_swap', ['disciplines' => $disciplines, 'employees' => $employees]);
+        return new View('site.profile', ['disciplines' => $disciplines, 'selectDiscipline' => $selectDiscipline]);
     }
 
 
@@ -217,24 +160,7 @@ class Site
 
 
 
-//    public function employee_department(Request $request): string
-//    {
-//        $departments = Department::all();
-//
-//        if (array_key_exists('department', $request->all())) {
-//            $selectedDepartment = $request->get('department');
-//        } else {
-//            $selectedDepartment = [];
-//        }
-//
-//        if (!empty($selectedDepartment)) {
-//            $employees = Employee::whereIn('department_id', $selectedDepartment)->get();
-//        } else {
-//            $employees = Employee::all();
-//        }
-//
-//        return new View('site.employee_department', ['employees' => $employees, 'departments' => $departments]);
-//    }
+
 
 
 

@@ -1,4 +1,4 @@
-<h2>Книги:</h2>
+<h2>Поиск по дисциплине:</h2>
 <h3><?= $message ?? ''; ?></h3>
 <form method="post">
     <label>Авторы: <br>
@@ -14,18 +14,20 @@
 <h1>Список Книг</h1>
 <ol>
     <?php
-    foreach ($employees as $employee) {
-        echo '<p>Имя: ' . $employee->firt_name . '</p>';
-        echo '<p>Фамилия: ' . $employee->last_name . '</p>';
-        echo '<p>Отчество: ' . $employee->patronymic . '</p>';
-        echo '<p>Пол: ' . $employee->gender . '</p>';
-        echo '<p>Дата рождения: ' . $employee->birthday . '</p>';
-        echo '<p>Адрес проживания: ' . $employee->address . '</p>';
-        echo '<p>Должность: ' . $employee->post_id . '</p>';
-        echo '<p>Департамент ' . $employee->department_id. '</p>';
-        echo '<p>Дисциплина: ' . $employee->disciplines_id . '</p>';
-//        echo '<p><a href="/profile?id='.$employee->id.'">Просмотр</a></p>';
-        echo '<br><br><br>';
+    foreach ($selectDiscipline as $discipline) {
+        foreach ($discipline->employees as $employee) {
+            echo '<p>Имя: ' . $employee->firt_name . '</p>';
+            echo '<p>Фамилия: ' . $employee->last_name . '</p>';
+            echo '<p>Отчество: ' . $employee->patronymic . '</p>';
+            echo '<p>Пол: ' . $employee->gender . '</p>';
+            echo '<p>Дата рождения: ' . $employee->birthday . '</p>';
+            echo '<p>Адрес проживания: ' . $employee->address . '</p>';
+            echo '<p>Должность: ' . $employee->post_id . '</p>';
+            echo '<p>Департамент ' . $employee->department_id. '</p>';
+            echo '<p>Дисциплина: ' . $discipline->name . '</p>';
+            echo '<br><br><br>';
+        }
     }
+
     ?>
 </ol>

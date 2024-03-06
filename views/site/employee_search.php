@@ -20,8 +20,7 @@
                 echo '<p>Адрес проживания: ' . $employee->address . '</p>';
                 echo '<p>Должность: ' . $employee->post_id . '</p>';
                 echo '<p>Департамент ' . $employee->department_id. '</p>';
-                echo '<p>Дисциплина: ' . $employee->disciplines_id . '</p>';
-//                echo '<p><a href="/profile?id='.$employee->id.'">Просмотр</a></p>';
+                echo '<p>Дисциплина: ' . $employee->id . '</p>';
                 echo '<br><br><br>';
             }
         }

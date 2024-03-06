@@ -13,10 +13,10 @@
     <label>Адрес <input type="text" name="address"></label>
     <label>Департамент
             <select name="department_id">
-                <?php foreach($department as $departments)
+                <?php foreach($departments as $department)
                 {
                     ?>
-                    <option value="<?php echo $departments->id; ?>"><?php echo $departments->name; ?></option>
+                    <option value="<?php echo $department->id; ?>"><?php echo $department->name; ?></option>
                 <?php } ?>
             </select>
     </label>
@@ -41,5 +41,7 @@
     </label>
     <button>Зарегистрироваться</button>
 </form>
-<a class="xyu" href="<?= app()->route->getUrl('/employee_search') ?>">Поиск сотрудника</a>
+<a class="faa" href="<?= app()->route->getUrl('/employee_search') ?>">Поиск сотрудника</a> <br>
+<a class="faa" href="<?= app()->route->getUrl('/employee_search') ?>"></a>
+
 
