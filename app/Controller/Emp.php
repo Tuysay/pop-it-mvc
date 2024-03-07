@@ -97,7 +97,7 @@ class Emp
                 'russian' => 'Разрешен только русский язык'
             ]);
 
-//            Image::uploadFile($request, 'img/');
+            Image::uploadFile($request, 'photo/');
 
             if($validator->fails()){
                 return new View('site.signup',
@@ -107,12 +107,13 @@ class Emp
 
 
 
+
         $departments = Department::all();
         $posts = Posts::all();
         $disciplines = Disciplines::all();
 //        $uploadDirectory = 'photo/';
-
-
+//
+//
 //        if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
 //            $file = $_FILES['file'];
 //            $filename = $uploadDirectory . basename($file['name']);
@@ -120,6 +121,8 @@ class Emp
 //                return new View('site.hello');
 //            }
 //        }
+
+
 
 
         if ($request->method === 'POST' && $employee = Employee::create($request->all())) {

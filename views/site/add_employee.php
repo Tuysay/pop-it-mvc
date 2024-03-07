@@ -13,9 +13,9 @@
        </select>
     </label>
     <label>Адрес <input type="text" name="address"></label>
-<!--    <label>Аватарка-->
-<!--        <input type="file" name="avatar"><br>-->
-<!--    </label>-->
+    <label>Аватарка
+        <input type="file" name="avatar"><br>
+    </label>
     <label>Департамент
             <select name="department_id">
                 <?php foreach($departments as $department)
