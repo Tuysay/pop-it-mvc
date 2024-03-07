@@ -1,5 +1,7 @@
 <div class="search_employee_form">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+
         <fieldset>
             <pre><?= $message ?? ''; ?></pre>
             <h2>Поиск сотрудника</h2>
@@ -18,6 +20,7 @@
                 echo '<p>Пол: ' . $employee->gender . '</p>';
                 echo '<p>Дата рождения: ' . $employee->birthday . '</p>';
                 echo '<p>Адрес проживания: ' . $employee->address . '</p>';
+//                echo '<img class="bg-black rounded-start" style="height: 250px; width: 250px;" src=photo'.$employee->avatar .'>';
                 echo '<p>Должность: ' . $employee->post_id . '</p>';
                 echo '<p>Департамент ' . $employee->department_id. '</p>';
                 echo '<p>Дисциплина: ' . $employee->id . '</p>';

@@ -1,6 +1,8 @@
 <h2>Добавление нового сотрудника</h2>
 <h3><?= $message ?? ''; ?></h3>
-<form method="post">
+<form method="post"  enctype="multipart/form-data">
+    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+
     <label>Имя <input type="text" name="firt_name"></label>
     <label>Фамилия <input type="text" name="last_name"></label>
     <label>Отчество <input type="text" name="patronymic"></label>
@@ -11,6 +13,9 @@
        </select>
     </label>
     <label>Адрес <input type="text" name="address"></label>
+<!--    <label>Аватарка-->
+<!--        <input type="file" name="avatar"><br>-->
+<!--    </label>-->
     <label>Департамент
             <select name="department_id">
                 <?php foreach($departments as $department)
@@ -42,6 +47,6 @@
     <button>Зарегистрироваться</button>
 </form>
 <a class="faa" href="<?= app()->route->getUrl('/employee_search') ?>">Поиск сотрудника</a> <br>
-<a class="faa" href="<?= app()->route->getUrl('/employee_search') ?>"></a>
+
 
 

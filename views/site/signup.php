@@ -1,5 +1,6 @@
 <div class="register_form">
     <form method="post">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
         <fieldset>
             <pre><?= $message ?? ''; ?></pre>
             <h2>Регистрация нового пользователя</h2>
