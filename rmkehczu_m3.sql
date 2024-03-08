@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Мар 05 2024 г., 21:39
--- Версия сервера: 8.0.29-0ubuntu0.20.04.3
--- Версия PHP: 8.1.18
+-- Хост: 127.0.0.1
+-- Время создания: Мар 08 2024 г., 05:54
+-- Версия сервера: 10.4.32-MariaDB
+-- Версия PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `departments` (
-  `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -47,9 +47,9 @@ INSERT INTO `departments` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `disciplines` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `disciplines`
@@ -69,28 +69,29 @@ INSERT INTO `disciplines` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `employees` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `firt_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `patronymic` varchar(255) NOT NULL,
   `gender` tinyint(1) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `post_id` int NOT NULL,
-  `department_id` int NOT NULL,
-  `birthday` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `post_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `birthday` date NOT NULL,
+  `img_photo` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `employees`
 --
 
-INSERT INTO `employees` (`id`, `firt_name`, `last_name`, `patronymic`, `gender`, `address`, `post_id`, `department_id`, `birthday`) VALUES
-(21, 'Макс', 'Ёлахов', 'Сергеевич', 1, 'Сибирская 102', 2, 12, '2002-04-22'),
-(22, 'Семен', 'Буртовой', 'Сергеевич', 1, 'Сибирская 102', 2, 12, '2993-03-11'),
-(27, 'паспр', 'Гапеев', 'Сергеевич', 1, 'Сибирская 102', 2, 12, '7887-05-07'),
-(28, 'Михаил', 'Гапеев', 'Сергеевич', 1, 'Сибирская 102', 4, 13, '1231-03-12'),
-(29, 'qwe', 'qwe', 'qwe', 0, 'wqe', 2, 12, '2024-01-01'),
-(30, '123', '123', '123', 0, 'Сибирская 102', 2, 12, '2024-01-01');
+INSERT INTO `employees` (`id`, `firt_name`, `last_name`, `patronymic`, `gender`, `address`, `post_id`, `department_id`, `birthday`, `img_photo`) VALUES
+(21, 'Макс', 'Ёлахов', 'Сергеевич', 1, 'Сибирская 102', 2, 12, '2002-04-22', ''),
+(22, 'Семен', 'Буртовой', 'Сергеевич', 1, 'Сибирская 102', 2, 12, '2993-03-11', ''),
+(30, '123', '123', '123', 0, 'Сибирская 102', 2, 12, '2024-01-01', ''),
+(31, 'Крендель', 'Гапеев', 'Сергеевич', 1, 'Сибирская 102', 3, 13, '2005-03-12', 'photo/172646-krasno_sinyaya_anime_devushka-anime-sinie_volosy-anime_art-devushka_koshka-1920x1080.png'),
+(32, 'Михаил', 'Гапеев', 'Сергеевич', 1, 'Сибирская 102', 2, 12, '2024-03-10', 'photo/175983-anime-hacune_miku-rot-ulybka-multfilm-1920x1080.jpg'),
+(33, 'Михаил', 'Сабибуров', 'Сергеевич', 1, 'Сибирская 10', 4, 13, '2024-03-13', 'photo/172646-krasno_sinyaya_anime_devushka-anime-sinie_volosy-anime_art-devushka_koshka-1920x1080.png');
 
 -- --------------------------------------------------------
 
@@ -99,10 +100,10 @@ INSERT INTO `employees` (`id`, `firt_name`, `last_name`, `patronymic`, `gender`,
 --
 
 CREATE TABLE `emp_disciplines` (
-  `id` int NOT NULL,
-  `id_employees` int NOT NULL,
-  `disciplines_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `id` int(11) NOT NULL,
+  `id_employees` int(11) NOT NULL,
+  `disciplines_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `emp_disciplines`
@@ -111,7 +112,10 @@ CREATE TABLE `emp_disciplines` (
 INSERT INTO `emp_disciplines` (`id`, `id_employees`, `disciplines_id`) VALUES
 (1, 21, 20),
 (2, 22, 19),
-(3, 30, 20);
+(3, 30, 20),
+(4, 31, 22),
+(5, 32, 18),
+(6, 33, 20);
 
 -- --------------------------------------------------------
 
@@ -120,9 +124,9 @@ INSERT INTO `emp_disciplines` (`id`, `id_employees`, `disciplines_id`) VALUES
 --
 
 CREATE TABLE `posts` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `posts`
@@ -140,9 +144,9 @@ INSERT INTO `posts` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `roles` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -151,12 +155,12 @@ CREATE TABLE `roles` (
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `users`
@@ -227,43 +231,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `disciplines`
 --
 ALTER TABLE `disciplines`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблицы `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT для таблицы `emp_disciplines`
 --
 ALTER TABLE `emp_disciplines`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

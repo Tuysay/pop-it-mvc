@@ -24,8 +24,7 @@ class Validator
         $this->validate();
     }
 
-    //Перебираем список всех валидируемых полей и для
-    //каждого поля вызываем метод validateField()
+
     private function validate(): void
     {
         foreach ($this->rules as $fieldName => $fieldValidators) {

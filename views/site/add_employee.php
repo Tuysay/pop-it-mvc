@@ -14,7 +14,7 @@
     </label>
     <label>Адрес <input type="text" name="address"></label>
     <label>Аватарка
-        <input type="file" name="avatar"><br>
+        <input type="file" name="img_photo"><br>
     </label>
     <label>Департамент
             <select name="department_id">

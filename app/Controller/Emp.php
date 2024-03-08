@@ -19,6 +19,22 @@ class Emp
 
     public function add_disciplines(Request $request): string
     {
+        if ($request->method==='POST'){
+            $validator = new Validator($request->all(), [
+                'name'=> ['required','russian'],
+
+            ], [
+                'required' => 'Поле :field пусто',
+                'russian' => 'Разрешен только русский язык'
+            ]);
+
+            if($validator->fails()){
+                return new View('site.signup',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+        }
+
+
         if ($request->method === 'POST' && Disciplines::create($request->all())) {
             app()->route->redirect('/hello');
         }
@@ -33,7 +49,6 @@ class Emp
 
             ], [
                 'required' => 'Поле :field пусто',
-                'unique' => 'Поле :field должно быть уникально',
                 'russian' => 'Разрешен только русский язык'
             ]);
 
@@ -62,7 +77,6 @@ class Emp
 
             ], [
                 'required' => 'Поле :field пусто',
-                'unique' => 'Поле :field должно быть уникально',
                 'russian' => 'Разрешен только русский язык'
             ]);
 
@@ -87,12 +101,11 @@ class Emp
                 'patronymic'=> ['required','russian'],
                 'gender'=> ['required'],
                 'address'=> ['required'],
-//                'img_photo'=> ['required', 'fileType'],
-//                'birthday'=>['required', 'dateType']
+                'img_photo'=> ['required', 'fileType'],
             ], [
                 'required' => 'Поле :field пусто',
                 'unique' => 'Поле :field должно быть уникально',
-//                'fileType'=>'Недопустимое разрешение файла',
+                'fileType'=>'Недопустимое разрешение файла',
                 'number'=> 'Поле :field должно быть числом',
                 'russian' => 'Разрешен только русский язык'
             ]);
@@ -111,18 +124,6 @@ class Emp
         $departments = Department::all();
         $posts = Posts::all();
         $disciplines = Disciplines::all();
-//        $uploadDirectory = 'photo/';
-//
-//
-//        if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-//            $file = $_FILES['file'];
-//            $filename = $uploadDirectory . basename($file['name']);
-//            if (!move_uploaded_file($file['tmp_name'], $filename)) {
-//                return new View('site.hello');
-//            }
-//        }
-
-
 
 
         if ($request->method === 'POST' && $employee = Employee::create($request->all())) {
@@ -140,23 +141,20 @@ class Emp
     }
 
 
-
-
     public function employee_search(): string
     {
         $disciplines = Disciplines::all();
         $searchName = $_POST['employee'] ?? [];
         if (!empty($searchName)) {
             $employees = Employee::whereIn('firt_name', $searchName)->get();
+        } else {
+            echo "Ты что то намудрил";
         }
 
 
         return new View('site.employee_search', ['employees' => $employees, 'disciplines' => $disciplines,]);
     }
-    public function add(): string
-    {
-        return new View('site.add');
-    }
+
     public function profile(): string
     {
         $disciplines = Disciplines::all();

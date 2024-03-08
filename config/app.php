@@ -15,7 +15,6 @@ return [
         'fileType' => \Validators\ImageValidator::class,
         'number' => \Validators\NumValidator::class,
         'russian'=> \Validators\RusValidator::class,
-        'dateType'=> \Validators\DataValodator::class,
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,

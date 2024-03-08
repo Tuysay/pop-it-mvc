@@ -19,7 +19,7 @@ class Employee extends Model
         'post_id',
         'department_id',
         'birthday',
-        'avatar'
+        'img_photo'
     ];
 
     public function disciplines(): BelongsToMany
