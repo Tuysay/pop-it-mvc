@@ -14,7 +14,10 @@
         "php": "^7.4 | ^8.0",
         "illuminate/database": "10.x-dev",
         "illuminate/events": "10.x-dev",
-        "nikic/fast-route": "^2.0@dev"
+        "nikic/fast-route": "^2.0@dev",
+        "tuysay/collect": "dev-master",
+        "tuysay/vallidators": "dev-master",
+        "tuysay/validator": "dev-master"
     },
     "autoload": {
         "psr-4": {

@@ -7,7 +7,7 @@
     <label>Фамилия <input type="text" name="last_name"></label>
     <label>Отчество <input type="text" name="patronymic"></label>
     <label>Пол
-       <select name="gender" id="gender">
+       <select  name="gender">
            <option value="1">Мужской</option>
            <option value="0">Женский</option>
        </select>

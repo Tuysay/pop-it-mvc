@@ -12,7 +12,7 @@
     </label>
     <button>Выбрать</button>
 </form>
-<h1>Список Книг</h1>
+<h1>Список сотрудников</h1>
 <ol>
     <?php
     foreach ($selectDiscipline as $discipline) {

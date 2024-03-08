@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 08 2024 г., 05:54
+-- Время создания: Мар 08 2024 г., 10:43
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -60,7 +60,8 @@ INSERT INTO `disciplines` (`id`, `name`) VALUES
 (19, 'Химия'),
 (20, 'Vdfsaf'),
 (21, 'Семен Сергеевич Буртовой'),
-(22, 'Природа и ее важность');
+(22, 'Природа и ее важность'),
+(23, 'Михаил');
 
 -- --------------------------------------------------------
 
@@ -91,7 +92,9 @@ INSERT INTO `employees` (`id`, `firt_name`, `last_name`, `patronymic`, `gender`,
 (30, '123', '123', '123', 0, 'Сибирская 102', 2, 12, '2024-01-01', ''),
 (31, 'Крендель', 'Гапеев', 'Сергеевич', 1, 'Сибирская 102', 3, 13, '2005-03-12', 'photo/172646-krasno_sinyaya_anime_devushka-anime-sinie_volosy-anime_art-devushka_koshka-1920x1080.png'),
 (32, 'Михаил', 'Гапеев', 'Сергеевич', 1, 'Сибирская 102', 2, 12, '2024-03-10', 'photo/175983-anime-hacune_miku-rot-ulybka-multfilm-1920x1080.jpg'),
-(33, 'Михаил', 'Сабибуров', 'Сергеевич', 1, 'Сибирская 10', 4, 13, '2024-03-13', 'photo/172646-krasno_sinyaya_anime_devushka-anime-sinie_volosy-anime_art-devushka_koshka-1920x1080.png');
+(33, 'Михаил', 'Сабибуров', 'Сергеевич', 1, 'Сибирская 10', 4, 13, '2024-03-13', 'photo/172646-krasno_sinyaya_anime_devushka-anime-sinie_volosy-anime_art-devushka_koshka-1920x1080.png'),
+(34, 'Лиля', 'Крылова', 'Сергеевна', 1, 'Сибирская 10', 5, 13, '2024-03-05', 'photo/pngwing.com.png'),
+(35, 'Лиля', 'Крылова', 'Сергеевна', 0, 'Сибирская 10', 4, 12, '2024-03-26', 'photo/pngwing.com.png');
 
 -- --------------------------------------------------------
 
@@ -115,7 +118,9 @@ INSERT INTO `emp_disciplines` (`id`, `id_employees`, `disciplines_id`) VALUES
 (3, 30, 20),
 (4, 31, 22),
 (5, 32, 18),
-(6, 33, 20);
+(6, 33, 20),
+(7, 34, 20),
+(8, 35, 20);
 
 -- --------------------------------------------------------
 
@@ -135,7 +140,8 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`id`, `name`) VALUES
 (2, 'Физрук'),
 (3, 'Крутойчел'),
-(4, 'ыфЫВФ');
+(4, 'ыфЫВФ'),
+(5, 'уборщик');
 
 -- --------------------------------------------------------
 
@@ -170,7 +176,10 @@ INSERT INTO `users` (`id`, `name`, `login`, `password`, `role_id`) VALUES
 (9, 'Да', 'eggi', '202cb962ac59075b964b07152d234b70', 2),
 (10, 'Семен Сергеевич Буртовой', 'poh', '202cb962ac59075b964b07152d234b70', 1),
 (11, 'ssss aaaa dddd', '123', '202cb962ac59075b964b07152d234b70', 2),
-(12, '23', '231', '9bd5ee6fe55aaeb673025dbcb8f939c1', 1);
+(12, '23', '231', '9bd5ee6fe55aaeb673025dbcb8f939c1', 1),
+(13, 'Клара', 'falis', '202cb962ac59075b964b07152d234b70', 1),
+(14, 'Крендель', 'as', '202cb962ac59075b964b07152d234b70', 2),
+(15, 'лапа', 'mda', '202cb962ac59075b964b07152d234b70', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -237,25 +246,25 @@ ALTER TABLE `departments`
 -- AUTO_INCREMENT для таблицы `disciplines`
 --
 ALTER TABLE `disciplines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT для таблицы `emp_disciplines`
 --
 ALTER TABLE `emp_disciplines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `roles`
@@ -267,7 +276,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
